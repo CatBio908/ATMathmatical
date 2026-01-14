@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Grid2D : MonoBehaviour
 {
-
+ 
     public Vector3 ScreenSize;
     public Vector3 origin;
+
+    public float OriginY;
+    public float OriginX;
 
     public float GridSize = 10f;
     public float MinGridSize = 2f;
@@ -17,38 +19,90 @@ public class Grid2D : MonoBehaviour
 
     public float OriginSize = .6f;
 
+    public float TopPoint;
+    public float RightPoint;
+    public float BottomPoint;
+    public float LeftPoint;
+
     public Color AxisColor = Color.white;
     public Color LineColor = Color.grey;
     public Color DivisionColor = Color.yellow;
+    public Color OriginColor = Color.blue;
 
-    bool isDrawingOrigin = false;
-    bool isDrawingAxis = true;
-    bool isDrawingDivisions = true;
+    public bool isDrawingOrigin = false;
+    public bool isDrawingAxis = true;
+    public bool isDrawingDivisions = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ScreenSize = new Vector3(Screen.width, Screen.height);
+        origin = new Vector3(Screen.width / 2, Screen.height / 2);
+
+        OriginY = Screen.height / 2;
+        OriginX = Screen.width / 2;
+
+        TopPoint = GridSize * OriginSize;
+        RightPoint = GridSize * OriginSize;
+        BottomPoint = GridSize * OriginSize;
+        LeftPoint = GridSize * OriginSize;
+}
+
+    void Update()
+    {
+        DrawAxis();
+        DrawOrigin();
     }
 
-    /*public Vector3 GridtoScene(Vector3)
+    public Vector3 GridtoScene(Vector3 gridSpace)
     {
-        return;
-    } */
+        return Vector3.zero;
+    } 
     
-    /*public Vector3 ScenetoGrid(Vector3)
+    public Vector3 ScenetoGrid(Vector3 screenSpace)
     {
-        return;
-    } */
+        return Vector3.zero;
+    }
 
-    /*public void DrawLine(Line)
+    /// <summary>
+    /// Draws the given line object. If you are creating new line object, use the overload that takes parameters instead.
+    /// </summary>
+    /// <param name="line"></param>
+    public void DrawLine(Line line)
     {
-
-    } */
+        Glint.AddCommand(line);
+    }
+    /// <summary>
+    /// Draws a line, This overload takes line parameters
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <param name="color"></param>
+    public void DrawLine(Vector3 start, Vector3 end, Color color)
+    {
+        Glint.AddCommand(new Line(start, end, color));
+    }
 
     public void DrawOrigin()
     {
+        if (isDrawingOrigin == true)
+        {
+            DrawLine(new Vector3(0, TopPoint, 0) + origin, new Vector3(RightPoint, 0, 0) + origin , OriginColor);
+            DrawLine(new Vector3(RightPoint, 0, 0) + origin, new Vector3(0, -BottomPoint, 0) + origin, OriginColor);
+            DrawLine(new Vector3(0, -BottomPoint, 0) + origin, new Vector3(-LeftPoint, 0, 0) + origin, OriginColor);
+            DrawLine(new Vector3(-LeftPoint, 0, 0) + origin, new Vector3(0, TopPoint, 0) + origin, OriginColor);
+        }
+    }
+
+    public void DrawAxis()
+    {
+        if (isDrawingAxis == true)
+        {
+            DrawLine(new Vector3(0, OriginY, 0), new Vector3(Screen.width, OriginY, 0), AxisColor);
+            DrawLine(new Vector3(OriginX, 0, 0), new Vector3(OriginX, Screen.height, 0), AxisColor);
+        }
 
     }
+
 
 }
