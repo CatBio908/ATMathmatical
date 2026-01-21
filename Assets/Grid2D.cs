@@ -27,11 +27,12 @@ public class Grid2D : MonoBehaviour
     public Color AxisColor = Color.white;
     public Color LineColor = Color.grey;
     public Color DivisionColor = Color.yellow;
-    public Color OriginColor = Color.blue;
 
     public bool isDrawingOrigin = false;
     public bool isDrawingAxis = true;
     public bool isDrawingDivisions = true;
+
+    public bool isDrawing = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,17 +42,18 @@ public class Grid2D : MonoBehaviour
 
         OriginY = Screen.height / 2;
         OriginX = Screen.width / 2;
-
-        TopPoint = GridSize * OriginSize;
-        RightPoint = GridSize * OriginSize;
-        BottomPoint = GridSize * OriginSize;
-        LeftPoint = GridSize * OriginSize;
-}
+    }
 
     void Update()
     {
         DrawAxis();
         DrawOrigin();
+        DrawDivision();
+        DrawGrid();
+        TopPoint = GridSize * OriginSize;
+        RightPoint = GridSize * OriginSize;
+        BottomPoint = GridSize * OriginSize;
+        LeftPoint = GridSize * OriginSize;
     }
 
     public Vector3 GridtoScene(Vector3 gridSpace)
@@ -87,10 +89,10 @@ public class Grid2D : MonoBehaviour
     {
         if (isDrawingOrigin == true)
         {
-            DrawLine(new Vector3(0, TopPoint, 0) + origin, new Vector3(RightPoint, 0, 0) + origin , OriginColor);
-            DrawLine(new Vector3(RightPoint, 0, 0) + origin, new Vector3(0, -BottomPoint, 0) + origin, OriginColor);
-            DrawLine(new Vector3(0, -BottomPoint, 0) + origin, new Vector3(-LeftPoint, 0, 0) + origin, OriginColor);
-            DrawLine(new Vector3(-LeftPoint, 0, 0) + origin, new Vector3(0, TopPoint, 0) + origin, OriginColor);
+            DrawLine(new Vector3(0, TopPoint, 0) + origin, new Vector3(RightPoint, 0, 0) + origin , LineColor);
+            DrawLine(new Vector3(RightPoint, 0, 0) + origin, new Vector3(0, -BottomPoint, 0) + origin, LineColor);
+            DrawLine(new Vector3(0, -BottomPoint, 0) + origin, new Vector3(-LeftPoint, 0, 0) + origin, LineColor);
+            DrawLine(new Vector3(-LeftPoint, 0, 0) + origin, new Vector3(0, TopPoint, 0) + origin, LineColor);
         }
     }
 
@@ -102,6 +104,30 @@ public class Grid2D : MonoBehaviour
             DrawLine(new Vector3(OriginX, 0, 0), new Vector3(OriginX, Screen.height, 0), AxisColor);
         }
 
+    }
+
+    public void DrawGrid()
+    {
+        Vector3 PosPoint;
+        Vector3 NegPoint;
+
+        //indexOffset = 0;
+
+        while (isDrawing)
+        {
+
+        }
+    }
+
+    public void DrawDivision()
+    {
+        if (isDrawingDivisions == true)
+        {
+          /*  DrawLine(new Vector3(0, OriginY + DivisionCount, 0), new Vector3(Screen.width, OriginY + DivisionCount, 0), DivisionColor);
+            DrawLine(new Vector3(0, OriginY - DivisionCount, 0), new Vector3(Screen.width, OriginY - DivisionCount, 0), DivisionColor);
+            DrawLine(new Vector3(OriginX + DivisionCount, 0, 0), new Vector3(OriginX + DivisionCount, Screen.height, 0), DivisionColor);
+            DrawLine(new Vector3(OriginX - DivisionCount, 0, 0), new Vector3(OriginX - DivisionCount, Screen.height, 0), DivisionColor); */
+        }
     }
 
 
