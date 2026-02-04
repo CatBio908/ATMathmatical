@@ -226,21 +226,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenSize: {x: 0, y: 0, z: 0}
   origin: {x: 0, y: 0, z: 0}
-  OriginY: 0
-  OriginX: 0
-  GridSize: 10
+  GridSize: 50
   MinGridSize: 2
-  DivisionCount: 5
+  DivisionCount: 3
   MinDivisionCount: 2
-  OriginSize: 0.6
-  TopPoint: 0
-  RightPoint: 0
-  BottomPoint: 0
-  LeftPoint: 0
+  OriginSize: 0.9
   AxisColor: {r: 1, g: 1, b: 1, a: 1}
   LineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   DivisionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  OriginColor: {r: 0, g: 0, b: 1, a: 1}
   isDrawingOrigin: 1
   isDrawingAxis: 1
   isDrawingDivisions: 1
