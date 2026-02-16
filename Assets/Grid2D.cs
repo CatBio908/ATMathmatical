@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Android.Gradle.Manifest;
@@ -54,6 +55,35 @@ public class Grid2D : MonoBehaviour
     public Vector3 ScenetoGrid(Vector3 screenSpace)
     {
         return Vector3.zero;
+    }
+
+    public float ScaleGrid2Screen(float value)
+    {
+        return value;
+    }
+
+    public float ScaleScreen2Grid(float value)
+    {
+        return value;
+    }
+
+    /*public static float V3ToAngle(Vector3 startPoint, Vector3 endPoint)
+    {
+        //startpointx - endpointx startpointy - endpointy = (new point)
+        Vector3 newPoint = (startPoint.x, startPoint.y) - (endPoint.x, endPoint.y);
+        Math.Atan2(newPoint.x, newPoint.y) * (180 / Math.PI);
+
+        
+    }*/
+
+    /* Public static float LineToAngle(Line line)
+    {
+        public static float V3ToAngle();
+    }*/
+
+    public static Vector3 RotatePoint(Vector3 Center, float angle, Vector3 pointIN)
+    {
+        return new Vector3();
     }
 
     void GetInput()
@@ -236,7 +266,7 @@ public class Grid2D : MonoBehaviour
     /// Draws the given line object. If you are creating new line object, use the overload that takes parameters instead.
     /// </summary>
     /// <param name="line"></param>
-    public void DrawLine(Line line)
+    public void DrawLine(Line line, bool drawOnGrid = true)
     {
         Glint.AddCommand(line);
     }
@@ -246,7 +276,7 @@ public class Grid2D : MonoBehaviour
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <param name="color"></param>
-    public void DrawLine(Vector3 start, Vector3 end, Color color)
+    public void DrawLine(Vector3 start, Vector3 end, Color color, bool drawOnGrid = true)
     {
         Glint.AddCommand(new Line(start, end, color));
     }
