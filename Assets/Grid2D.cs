@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Android.Gradle;
 using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,13 +30,15 @@ public class Grid2D : MonoBehaviour
     public bool isDrawingAxis = true;
     public bool isDrawingDivisions = true;
 
-
+    public List<DrawingObject> DrawingObjects;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ScreenSize = new Vector3(UnityEngine.Screen.width, UnityEngine.Screen.height);
         origin = new Vector3(UnityEngine.Screen.width / 2, UnityEngine.Screen.height / 2);
+
+        DrawingObjects = new List<DrawingObject>();
 
     }
 
@@ -45,26 +48,21 @@ public class Grid2D : MonoBehaviour
 
         DrawGrid();
 
+        //DrawObject();
+
     }
 
     public Vector3 GridtoScene(Vector3 gridSpace)
     {
+
         return Vector3.zero;
     }
 
     public Vector3 ScenetoGrid(Vector3 screenSpace)
     {
+
+
         return Vector3.zero;
-    }
-
-    public float ScaleGrid2Screen(float value)
-    {
-        return value;
-    }
-
-    public float ScaleScreen2Grid(float value)
-    {
-        return value;
     }
 
     /*public static float V3ToAngle(Vector3 startPoint, Vector3 endPoint)
@@ -249,6 +247,11 @@ public class Grid2D : MonoBehaviour
             //test for y being off the screen on both sides
 
         }
+    }
+
+    public void DrawObject(DrawingObject lineObj, bool DrawOnGrid = true)
+    {
+       
     }
 
     public bool IsOffScreen(Vector3 point)
