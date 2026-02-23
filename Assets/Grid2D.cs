@@ -1,17 +1,14 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
-using Unity.Android.Gradle;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Grid2D : MonoBehaviour
 {
 
     public Vector3 ScreenSize;
     public Vector3 origin;
+   
 
     public float GridSize = 10f;
     public float MinGridSize = 2f;
@@ -29,8 +26,9 @@ public class Grid2D : MonoBehaviour
     public bool isDrawingOrigin = false;
     public bool isDrawingAxis = true;
     public bool isDrawingDivisions = true;
+    public bool isDrawingObjects = true;
 
-    public List<DrawingObject> DrawingObjects;
+    public List<DrawingObject> lineObjects;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,7 +36,8 @@ public class Grid2D : MonoBehaviour
         ScreenSize = new Vector3(UnityEngine.Screen.width, UnityEngine.Screen.height);
         origin = new Vector3(UnityEngine.Screen.width / 2, UnityEngine.Screen.height / 2);
 
-        DrawingObjects = new List<DrawingObject>();
+        lineObjects = new List<DrawingObject>();
+        lineObjects.Add(new Arrow());
 
     }
 
@@ -48,38 +47,27 @@ public class Grid2D : MonoBehaviour
 
         DrawGrid();
 
-        //DrawObject();
+        DrawObjects();
 
     }
 
     public Vector3 GridtoScene(Vector3 gridSpace)
     {
 
-        return Vector3.zero;
+    
+        return (origin + (gridSpace * GridSize));
     }
 
     public Vector3 ScenetoGrid(Vector3 screenSpace)
     {
+        Vector3 result = screenSpace - origin;
+        result /= GridSize;
 
+        return result;
 
-        return Vector3.zero;
     }
 
-    /*public static float V3ToAngle(Vector3 startPoint, Vector3 endPoint)
-    {
-        //startpointx - endpointx startpointy - endpointy = (new point)
-        Vector3 newPoint = (startPoint.x, startPoint.y) - (endPoint.x, endPoint.y);
-        Math.Atan2(newPoint.x, newPoint.y) * (180 / Math.PI);
-
-        
-    }*/
-
-    /* Public static float LineToAngle(Line line)
-    {
-        public static float V3ToAngle();
-    }*/
-
-    public static Vector3 RotatePoint(Vector3 Center, float angle, Vector3 pointIN)
+    public static Vector3 RotatePoint(Vector3 Center, float angle, Vector3 pointIn)
     {
         return new Vector3();
     }
@@ -165,10 +153,10 @@ public class Grid2D : MonoBehaviour
 
 
 
-            DrawLine(TopPoint, RightPoint, AxisColor);
-            DrawLine(RightPoint, BottomPoint, AxisColor);
-            DrawLine(BottomPoint, LeftPoint, AxisColor);
-            DrawLine(LeftPoint, TopPoint, AxisColor);
+            DrawLine(TopPoint, RightPoint, AxisColor, false);
+            DrawLine(RightPoint, BottomPoint, AxisColor, false);
+            DrawLine(BottomPoint, LeftPoint, AxisColor, false);
+            DrawLine(LeftPoint, TopPoint, AxisColor, false);
 
         }
     }
@@ -177,9 +165,11 @@ public class Grid2D : MonoBehaviour
 
     public void DrawLineAtPoint(Vector3 point, Color drawingColor)
     {
+        //consider creating local varaibles to pass into the draw line function
 
-        DrawLine(new Vector3(0, point.y, 0), new Vector3(UnityEngine.Screen.width, point.y, 0), drawingColor);
-        DrawLine(new Vector3(point.x, 0, 0), new Vector3(point.x, UnityEngine.Screen.height, 0), drawingColor);
+        // Points of line are ystart yend xstart xend
+        DrawLine(new Vector3(0, point.y, 0), new Vector3(UnityEngine.Screen.width, point.y, 0), drawingColor, false);
+        DrawLine(new Vector3(point.x, 0, 0), new Vector3(point.x, UnityEngine.Screen.height, 0), drawingColor, false);
     }
     public void DrawGrid()
     {
@@ -249,9 +239,20 @@ public class Grid2D : MonoBehaviour
         }
     }
 
-    public void DrawObject(DrawingObject lineObj, bool DrawOnGrid = true)
+    public void DrawObjects()
     {
-       
+        if (!isDrawingObjects) { return; }
+
+        if (lineObjects.Count == 0)
+        {
+            Debug.Log("No objects to draw");
+            return;
+        }
+
+        foreach (DrawingObject obj in lineObjects)
+        {
+            obj.Draw(this);
+        }
     }
 
     public bool IsOffScreen(Vector3 point)
@@ -271,7 +272,13 @@ public class Grid2D : MonoBehaviour
     /// <param name="line"></param>
     public void DrawLine(Line line, bool drawOnGrid = true)
     {
-        Glint.AddCommand(line);
+        if (!drawOnGrid)
+        {
+            Glint.AddCommand(line);
+            return;
+        }
+        DrawLine(line.start, line.end, line.color, drawOnGrid);
+        
     }
     /// <summary>
     /// Draws a line, This overload takes line parameters
@@ -281,7 +288,13 @@ public class Grid2D : MonoBehaviour
     /// <param name="color"></param>
     public void DrawLine(Vector3 start, Vector3 end, Color color, bool drawOnGrid = true)
     {
-        Glint.AddCommand(new Line(start, end, color));
+        if (!drawOnGrid)
+        {
+            Glint.AddCommand(new Line(start,  end, color));
+            return;
+        }
+
+        Glint.AddCommand(new Line(GridtoScene(start), GridtoScene(end), color));
     }
 
 }
