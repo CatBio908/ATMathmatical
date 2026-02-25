@@ -28,6 +28,11 @@ public class DrawableObject
 
     }
 
+    public virtual void Tick()
+    {
+
+    }
+
     public void AddLineToObject(Line line)
     {
         LineList.Add(line);
@@ -64,12 +69,21 @@ public class DrawableObject
     {
         Line translatedLine = line;
 
-        // Rotate
-
         // Scale
 
-        // Position
+        translatedLine.start *= Scale.x;
+        translatedLine.start *= Scale.y;
+        translatedLine.start *= Scale.z;
 
+        translatedLine.end *= Scale.x;
+        translatedLine.end *= Scale.y;
+        translatedLine.end *= Scale.z;
+
+        // Rotate
+
+        // Position
+        translatedLine.start += Position;
+        translatedLine.end += Position;
 
         return translatedLine;
     }
