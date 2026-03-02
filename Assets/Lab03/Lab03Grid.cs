@@ -6,10 +6,26 @@ public class Lab03Grid : DrawableGrid
     {
         int sceneIndex; 
         DrawableArrow newArrow; 
+        DrawableObject newGraph;
 
 
         AddScene("Empty Scene, Use Tab To Switch Scenes");
 
+        sceneIndex = AddScene("Parabola 1: Y=X^2");
+        newGraph = new Parabola1();
+        AddObjectToScene(sceneIndex, newGraph);
+
+        sceneIndex = AddScene("Parabola 2: Y=X^2+2x+1");
+        newGraph = new Parabola2();
+        AddObjectToScene(sceneIndex, newGraph);
+
+        sceneIndex = AddScene("Parabola 3: Y=-2X^2+10x+12");
+        newGraph = new Parabola3();
+        AddObjectToScene(sceneIndex, newGraph);
+
+        sceneIndex = AddScene("Parabola 3: X=Y^3");
+        newGraph = new Parabola4();
+        AddObjectToScene(sceneIndex, newGraph);
 
         sceneIndex = AddScene("Arrow, As is");
         newArrow = new DrawableArrow();

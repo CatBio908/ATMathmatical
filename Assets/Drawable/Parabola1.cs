@@ -1,22 +1,32 @@
 using UnityEngine;
 
-public class Parabola1 : DrawingObject
+public class Parabola1 : DrawableObject
 {
 
     public override void Initalize()
     {
-        
+        for (int i = -100; i < 100; i++)
+        {
+           AddLineToObject(GetPointAt(i), GetPointAt(i + 1), Color.magenta);
+        }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public float GetYPointatXof(float xValue)
     {
-        
+        //float yValue;
+
+        //yValue = MathF.Pow(xValue, 2);
+        //yValue = xValue * xValue;
+
+        //return yValue;
+
+        return Mathf.Pow(xValue, 2);
     }
-    //return.mathf(xvalue, 2);
-    // Update is called once per frame
-    void Update()
+
+    public Vector3 GetPointAt(float xValue)
     {
-        
+        return new Vector3(xValue, GetYPointatXof(xValue), 0);
     }
+    
 }
