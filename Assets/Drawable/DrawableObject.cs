@@ -12,7 +12,7 @@ public class DrawableObject
 
     // Transform information 
     public Vector3 Position = Vector3.zero;
-    public float Roation = 0;
+    public float Rotation = 0;
     public Vector3 Scale = Vector3.one;
 
     public List<Line> LineList;
@@ -86,5 +86,7 @@ public class DrawableObject
         translatedLine.end += Position;
 
         return translatedLine;
+
+
     }
 }
