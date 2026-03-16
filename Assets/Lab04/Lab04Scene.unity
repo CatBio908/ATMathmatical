@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenSize: {x: 0, y: 0, z: 0}
   origin: {x: 0, y: 0, z: 0}
-  gridSize: 20
+  gridSize: 2
   minGridSize: 2
   originSize: 0.6
   axisColor: {r: 1, g: 1, b: 1, a: 1}
@@ -236,11 +236,11 @@ MonoBehaviour:
   isDrawingTheGrid: 1
   isDrawingOrigin: 1
   isDrawingAxis: 1
-  isDrawingAxisOnly: 0
+  isDrawingAxisOnly: 1
   isDrawingDivisions: 0
-  isTickAllScenes: 0
+  isTickAllScenes: 1
   isTickingScenes: 1
-  isTickingGrid: 1
+  isTickingGrid: 0
   MousePosition: {x: 0, y: 0, z: 0}
   SceneIndex: 0
   SceneListName: []
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac91bf2fa07cf94b8dd998ceb9d7edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
+  grid: {fileID: 368091528}
   WhiteTextField: {fileID: 796140858}
   BlackTextField: {fileID: 1162124683}
 --- !u!1 &1043325343

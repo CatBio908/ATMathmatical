@@ -26,6 +26,7 @@ class FacingArrow : DrawableObject
 
     public override void Tick()
     {
+        
         if (isMoving)
         {
             Position.x += MoveSpeed * Time.deltaTime;
@@ -34,9 +35,8 @@ class FacingArrow : DrawableObject
         {
             // This works because they're in Screen Space
             //Vector3 screenPosition = DrawableGrid.Instance.origin;
-            /*Vector3 screenPosition = DrawableGrid.Instance.GridToScreen(Position);
-            Roattion = V3ToAngle(screenPosition,
-            DrawableGrid.Instance.MousePosition);*/
+            Vector3 screenPosition = DrawableGrid.Instance.GridToScreen(Position);
+            Rotation = V3ToAngle(screenPosition,DrawableGrid.Instance.MousePosition);
         }
     }
 }

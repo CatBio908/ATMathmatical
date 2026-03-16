@@ -33,9 +33,7 @@ public class DrawableGrid : MonoBehaviour
 
     public Vector3 MousePosition = Vector3.zero;
 
-
     //public List<DrawableObject> lineObjects; 
-
 
     public int SceneIndex = 0; 
     public List< List<DrawableObject> > SceneList;
@@ -53,7 +51,6 @@ public class DrawableGrid : MonoBehaviour
         origin = new Vector3(Screen.width / 2, Screen.height / 2);
 
         //lineObjects = new List<DrawableObject>(); 
-
 
         SceneList = new List< List<DrawableObject> >();
         SceneListName = new List<string>();
@@ -75,13 +72,11 @@ public class DrawableGrid : MonoBehaviour
         DrawGrid();
 
         DrawScene(); 
-
     }
 
     public void TickScenes()
     {
         if (!isTickingScenes) { return; }
-
 
         if (isTickAllScenes)
         {
@@ -115,7 +110,6 @@ public class DrawableGrid : MonoBehaviour
     {
 
     }
-
 
     public void SelectNextScene()
     {
