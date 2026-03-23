@@ -221,12 +221,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 368091525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1547bb2292d56484997636568b76000a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e4624a2e79025f4d99e7397c26fb281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   screenSize: {x: 0, y: 0, z: 0}
   origin: {x: 0, y: 0, z: 0}
-  gridSize: 2
+  gridSize: 10
   minGridSize: 2
   originSize: 0.6
   axisColor: {r: 1, g: 1, b: 1, a: 1}
@@ -237,10 +237,10 @@ MonoBehaviour:
   isDrawingOrigin: 1
   isDrawingAxis: 1
   isDrawingAxisOnly: 1
-  isDrawingDivisions: 0
-  isTickAllScenes: 1
+  isDrawingDivisions: 1
+  isTickAllScenes: 0
   isTickingScenes: 1
-  isTickingGrid: 0
+  isTickingGrid: 1
   MousePosition: {x: 0, y: 0, z: 0}
   SceneIndex: 0
   SceneListName: []
