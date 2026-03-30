@@ -41,21 +41,29 @@ public static class CollisionTools
 
     public static bool IsPointInCircle(Vector3 Point, Vector3 Center, float Radius)
     {
+        bool result = false;
 
+        Vector3 DistanceVector = Point - Center;
 
-
+        if (DistanceVector.magnitude < Radius)
+        {
+            result = true;
+        }
 
         // stub code 
-        return true; 
+        return result; 
     }
 
-    public static bool IsPointInRectangle(Vector3 Point, Rect Rectangle)
+    public static bool IsPointInRectangle(Vector3 Point, Rect Box)
     {
         // stub code 
-        return false;
+        return (Point.x > Box.X) && (Point.x < (Box.X + Box.Width))
+            && (Point.y > Box.Y) && (Point.y < (Box.Y + Box.Height));
     }
     public static bool IsPointInTriangle(Vector3 Point, TriangleData Triangle)
     {
+
+
         // stub code 
         return false;
     }
