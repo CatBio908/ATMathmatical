@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 using Rect = System.Drawing.Rectangle;
@@ -62,9 +63,14 @@ public static class CollisionTools
     }
     public static bool IsPointInTriangle(Vector3 Point, TriangleData Triangle)
     {
+        //Vector3 side1 = (Triangle.PointB - Triangle.PointA), (Point - Triangle.PointA);
+        //Vector3 side2 = (Triangle.PointB - Triangle.PointA), (Point - Triangle.PointA);
+        //Vector3.Cross(side1, side2);
 
+        return false;
+            
 
         // stub code 
-        return false;
+       
     }
 }
