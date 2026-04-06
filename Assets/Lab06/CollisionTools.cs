@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ public static class CollisionTools
         }
     }
 
-    public static void SetColor(DrawableObject thing,  Color color)
+    public static void SetColor(DrawableObject thing, Color color)
     {
         for (int i = 0; i < thing.LineList.Count; i++)
         {
@@ -63,14 +64,24 @@ public static class CollisionTools
     }
     public static bool IsPointInTriangle(Vector3 Point, TriangleData Triangle)
     {
-        //Vector3 side1 = (Triangle.PointB - Triangle.PointA), (Point - Triangle.PointA);
-        //Vector3 side2 = (Triangle.PointB - Triangle.PointA), (Point - Triangle.PointA);
+        /*Vector3.Cross((Triangle.PointB - Triangle.PointA), (Point - Triangle.PointA));
+        Vector3.Cross((Triangle.PointA - Triangle.PointC), (Point - Triangle.PointC));
+        Vector3.Cross((Triangle.PointC - Triangle.PointB), (Point - Triangle.PointB)); */
         //Vector3.Cross(side1, side2);
 
         return false;
             
-
         // stub code 
-       
+
     }
+
+    public static bool SameSide()
+    {
+        
+
+        
+
+        return true;
+    }
+
 }
