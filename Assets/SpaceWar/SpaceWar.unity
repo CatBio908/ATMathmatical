@@ -221,12 +221,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 368091525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a149f010a7f364e8a5ef35d1fd0136, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e7d96a3ccdf91443b3e749396dff7c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   screenSize: {x: 0, y: 0, z: 0}
   origin: {x: 0, y: 0, z: 0}
-  gridSize: 10
+  gridSize: 2
   minGridSize: 2
   originSize: 0.6
   axisColor: {r: 1, g: 1, b: 1, a: 1}
@@ -244,9 +244,15 @@ MonoBehaviour:
   MousePosition: {x: 0, y: 0, z: 0}
   SceneIndex: 0
   SceneListName: []
-  CircleCollisionResult: NO
-  RectangleCollisionResult: NO
-  TriangleCollisionResult: NO
+  isPlayingGame: 0
+  DebugMagicCircle:
+    PerformDraw: 1
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: 0
+    Scale: {x: 1, y: 1, z: 1}
+  MagicCircleRadius: 200
+  PlayerAScore: 0
+  PlayerBScore: 0
 --- !u!1 &796140856
 GameObject:
   m_ObjectHideFlags: 0
