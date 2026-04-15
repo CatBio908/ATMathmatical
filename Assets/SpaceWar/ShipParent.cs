@@ -9,6 +9,8 @@ public class ShipParent : MovingObject
     public float ShipMaxVelocity = 250;
     public float ShipThrust = 25f;
 
+    public Missle missleObject;
+
     public void SetupA(DrawableGrid grid, int sceneIndex)
     {
         ship = new ShipA();
@@ -69,11 +71,15 @@ public class ShipParent : MovingObject
 
     public void FireMissle(DrawableGrid grid, int sceneIndex)
     {
-        //Vector3 Spawn;
+        missleObject = new Missle();
+        missleObject.Position = this.Position + DrawingTools.CircleRadiusPoint(Vector3.zero, GetRotationinDegrees(), 13);
+        //missleObject.SetRotationinDegrees(75);
+        missleObject.CreateCollision(2, grid, sceneIndex);
+        missleObject.LaunchMissle(this.GetRotationinDegrees());
+        grid.AddObjectToScene(sceneIndex, missleObject);
+        SpaceWarGrid.self.MovingObjectlist.Add(missleObject);
 
-        //Missle.MakeMissile(Rotation);
 
-        
     }
 
     public void FireLaser(DrawableGrid grid, int sceneIndex)

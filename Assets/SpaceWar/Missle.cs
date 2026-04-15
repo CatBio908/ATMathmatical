@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Missle : MovingObject
@@ -12,7 +13,7 @@ public class Missle : MovingObject
         AddLineToObject(new Vector3(-2, 2, 0), new Vector3(-1, 0, 0), Color.yellow);
         AddLineToObject(new Vector3(-1, 0, 0), new Vector3(-2, -2, 0), Color.yellow);
         AddLineToObject(new Vector3(-2, -2, 0), new Vector3(2, 0, 0), Color.yellow);
-
+       
     }
 
     public override void Tick()
@@ -48,13 +49,26 @@ public class Missle : MovingObject
         Missle missle = new Missle();
 
 
-
+        
     }
 
 
     public void LaunchMissle(float angle)
     {
         SetRotationinDegrees(angle); 
-        Velocity = DrawingTools.CircleRadiusPoint(Vector3.zero, angle, 1) * MoveSpeed; 
+        Velocity = DrawingTools.CircleRadiusPoint(Vector3.zero, angle, 1) * MoveSpeed;
+       
     }
+
+    IEnumerator Lifespan()
+    {
+        yield return new WaitForSeconds(15);
+
+        SpaceWarGrid.self.RemoveObject(this);
+        if (CollisionCircle != null)
+        {
+            SpaceWarGrid.self.RemoveObject(CollisionCircle);
+        }
+    }
+
 }
