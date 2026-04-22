@@ -8,8 +8,19 @@ public class ShipParent : MovingObject
     public DrawableObject thrust;
     public float ShipMaxVelocity = 250;
     public float ShipThrust = 25f;
+    public float ShipRotation = 120f;
+    
+    public bool IsDrawingLaser = false;
+    public float MissleLaunchAt = 13f;
+    public float LaserStart = 5f;
+    public float LaserEnd = 100f;
+    public float LaserShowTime = .5f;
+    public float LaserShowCounter = 0f;
+
 
     public Missle missleObject;
+
+    Line LaserObject;
 
     public void SetupA(DrawableGrid grid, int sceneIndex)
     {
@@ -20,6 +31,9 @@ public class ShipParent : MovingObject
         grid.AddObjectToScene(sceneIndex, thrust);
 
         MaxVelocity = ShipMaxVelocity; 
+
+        LaserObject = new Line();
+        LaserObject.color = Color.yellow;
     }
 
     public void SetupB(DrawableGrid grid, int sceneIndex)
@@ -31,12 +45,16 @@ public class ShipParent : MovingObject
         grid.AddObjectToScene(sceneIndex, thrust);
 
         MaxVelocity = ShipMaxVelocity;
+
+        LaserObject = new Line();
+        LaserObject.color = Color.yellow;
     }
 
     public override void Tick()
     {
         base.Tick();
         UpdateSubObjects();
+        UpdateLaser();
     }
 
     public void UpdateSubObjects()
@@ -51,6 +69,23 @@ public class ShipParent : MovingObject
         thrust.Scale = this.Scale;
     }
      
+    public void UpdateLaser()
+    {
+        if (!IsDrawingLaser)
+        {
+            return;
+        }
+        LaserShowCounter -= Time.deltaTime;
+
+        if (LaserShowCounter < 0)
+        {
+            IsDrawingLaser = false;
+            return;
+        }
+
+        LaserObject.start = this.Position + DrawingTools.CircleRadiusPoint(Vector3.zero, GetRotationinDegrees(), LaserStart);
+        LaserObject.end = this.Position + DrawingTools.CircleRadiusPoint(Vector3.zero, GetRotationinDegrees(), LaserEnd);
+    }
 
     public void AddThrust()
     {
@@ -66,13 +101,13 @@ public class ShipParent : MovingObject
 
     public void RotateShip(float value)
     { 
-       Rotation += (value * Time.deltaTime * Mathf.Deg2Rad);
+       Rotation += (ShipRotation * Time.deltaTime * Mathf.Deg2Rad);
     }
 
     public void FireMissle(DrawableGrid grid, int sceneIndex)
     {
         missleObject = new Missle();
-        missleObject.Position = this.Position + DrawingTools.CircleRadiusPoint(Vector3.zero, GetRotationinDegrees(), 13);
+        missleObject.Position = this.Position + DrawingTools.CircleRadiusPoint(Vector3.zero, GetRotationinDegrees(), MissleLaunchAt);
         //missleObject.SetRotationinDegrees(75);
         missleObject.CreateCollision(2, grid, sceneIndex);
         missleObject.LaunchMissle(this.GetRotationinDegrees());
@@ -84,6 +119,7 @@ public class ShipParent : MovingObject
 
     public void FireLaser(DrawableGrid grid, int sceneIndex)
     {
-
+        IsDrawingLaser = true;
+        LaserShowCounter = LaserShowTime;
     }
 }
