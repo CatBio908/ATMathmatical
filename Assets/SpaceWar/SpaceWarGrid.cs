@@ -51,7 +51,7 @@ public class SpaceWarGrid : DrawableGrid
 
     public override void SetupScenes()
     {
-        sceneIndex = AddScene("Lab 07: SpaceWar");
+        sceneIndex = AddScene("Lab 09: SpaceWar Laser");
         
         missleObject = new Missle();
         missleObject.Position = new Vector3(0, 75, 0);
@@ -125,6 +125,32 @@ public class SpaceWarGrid : DrawableGrid
 
     }
 
+    public override void CleanUpScenes()
+    {
+        if (RemoveList.Count == 0)
+        {
+            return;
+        }
+
+
+        foreach (var item in RemoveList)
+        {
+            SceneList[item.Value].Remove(item.Key);
+
+            //DrawableObject thing = item.Key;
+            //MovingObject mo = (MovingObject)item.Key;
+
+
+            if (item.Key is MovingObject)
+            {
+                MovingObjectlist.Remove((MovingObject)item.Key);
+            }
+
+        }
+
+        RemoveList.Clear();
+    }
+
     public void ApplyGravity()
     {
         if (!isApplyingGravity)
@@ -143,18 +169,29 @@ public class SpaceWarGrid : DrawableGrid
 
     }
 
+    public void RecordKill(bool who)
+    {
+        if (who)
+        {
+            PlayerAScore++;
+        }
+        else
+        {
+            PlayerBScore++;
+        }
+    }
 
     public void HandleInput()
     {
         if (P1_Thrust) { ShipAObject.AddThrust(); } else { ShipAObject.NoThrust(); }
-        if (P1_CWRotation) { ShipAObject.RotateShip(45); }
-        if (P1_CCWRotation) { ShipAObject.RotateShip(-45); }
+        if (P1_CWRotation) { ShipAObject.RotateShip(-1); }
+        if (P1_CCWRotation) { ShipAObject.RotateShip(1); }
         if (P1_FireMissle) { ShipAObject.FireMissle(this, sceneIndex); }
         if (P1_FireLaser) { ShipAObject.FireLaser(this, sceneIndex); ; }
 
         if (P2_Thrust) { ShipBObject.AddThrust(); } else { ShipBObject.NoThrust(); }
-        if (P2_CWRotation) { ShipBObject.RotateShip(45); }
-        if (P2_CCWRotation) { ShipBObject.RotateShip(-45); }
+        if (P2_CWRotation) { ShipBObject.RotateShip(-1); }
+        if (P2_CCWRotation) { ShipBObject.RotateShip(1); }
         if (P2_FireMissle) { ShipBObject.FireMissle(this, sceneIndex); }
         if (P2_FireLaser) { ShipBObject.FireLaser(this, sceneIndex); }
 

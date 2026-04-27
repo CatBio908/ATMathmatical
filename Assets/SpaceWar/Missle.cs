@@ -24,24 +24,24 @@ public class Missle : MovingObject
         {
             Debug.Log("Hit Ship A");
             SpaceWarGrid.self.PlayerBScore++;
-            SpaceWarGrid.self.RemoveObject(this);
-            if (CollisionCircle != null)
-            {
-                SpaceWarGrid.self.RemoveObject(CollisionCircle);
-            }
+            RemoveMissile();
         }
 
         if (CheckForCollisionWith(SpaceWarGrid.self.ShipBObject))
         {
             Debug.Log("Hit Ship B");
             SpaceWarGrid.self.PlayerAScore++;
-            SpaceWarGrid.self.RemoveObject(this);
-            if (CollisionCircle != null)
-            {
-                 SpaceWarGrid.self.RemoveObject(CollisionCircle);
-            }
+            RemoveMissile();
         }
+    }
 
+    public void RemoveMissile()
+    {
+        SpaceWarGrid.self.RemoveObject(this);
+        if (CollisionCircle != null)
+        {
+            SpaceWarGrid.self.RemoveObject(CollisionCircle);
+        }
     }
 
     public static void MakeMissile(float angle, Vector3 spawnPosition, Grid grid, int sceneIndex)
